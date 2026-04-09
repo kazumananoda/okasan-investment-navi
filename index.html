@@ -6,229 +6,218 @@
 <title>お母さんの投資相談室</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:18px;background:#fffbf5;color:#333;min-height:100vh}
-header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:center;border-bottom:2px solid #fde68a;position:sticky;top:0;z-index:10}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:18px;background:#fffbf5;color:#333}
+header{background:#fff;padding:16px;text-align:center;border-bottom:3px solid #fde68a}
 header h1{font-size:22px;color:#92400e;font-weight:700}
-main{max-width:640px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
-.card{background:#fff;border-radius:24px;padding:26px;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
-.card-title{font-size:22px;color:#92400e;font-weight:700;margin-bottom:6px}
-.card-sub{color:#999;font-size:16px;margin-bottom:18px}
-.input-row{display:flex;gap:10px}
-.ticker-input{flex:1;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;font-family:inherit}
-.check-btn{background:#f59e0b;color:#fff;border:none;border-radius:16px;padding:14px 24px;font-size:18px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
-.check-btn:disabled{background:#e5e7eb;cursor:default}
-.signal-box{border-radius:18px;padding:20px;margin-top:16px;border:2px solid}
-.signal-box.green{background:#f0fdf4;border-color:#86efac;color:#166534}
-.signal-box.yellow{background:#fefce8;border-color:#fde047;color:#854d0e}
-.signal-box.red{background:#fff1f2;border-color:#fda4af;color:#9f1239}
-.signal-head{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700;margin-bottom:10px}
-.dot{width:22px;height:22px;border-radius:50%;flex-shrink:0}
-.dot.g{background:#22c55e}.dot.y{background:#eab308}.dot.r{background:#f43f5e}
-.signal-msg{font-size:17px;line-height:1.75}
-.signal-note{font-size:14px;opacity:.6;margin-top:10px}
-.sim-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.sim-input{flex:1;min-width:140px;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;font-family:inherit}
-.sim-btn{background:#10b981;color:#fff;border:none;border-radius:16px;padding:14px 24px;font-size:18px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
-.sim-btn:disabled{background:#e5e7eb;cursor:default}
-.sim-result{background:#f0fdf4;border:2px solid #86efac;border-radius:18px;padding:20px;margin-top:12px;font-size:17px;line-height:1.85;color:#166534;white-space:pre-wrap}
-.chat-messages{display:flex;flex-direction:column;gap:14px;margin-bottom:16px;max-height:420px;overflow-y:auto;padding:4px}
-.msg{display:flex;align-items:flex-end;gap:8px}
+main{max-width:640px;margin:0 auto;padding:20px 16px;display:flex;flex-direction:column;gap:20px}
+.card{background:#fff;border-radius:20px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.07)}
+.card h2{font-size:20px;color:#92400e;font-weight:700;margin-bottom:6px}
+.card p{color:#999;font-size:15px;margin-bottom:16px}
+input[type=text],input[type=number],input[type=password],textarea{width:100%;border:2px solid #fde68a;border-radius:14px;padding:14px 16px;font-size:18px;outline:none;font-family:inherit;background:#fff;color:#333}
+input:focus,textarea:focus{border-color:#f59e0b}
+.row{display:flex;gap:10px}
+.row input{flex:1}
+button{border:none;border-radius:14px;padding:14px 22px;font-size:18px;font-weight:700;cursor:pointer;font-family:inherit}
+.ob{background:#f59e0b;color:#fff}
+.gb{background:#10b981;color:#fff}
+.pb{background:#f472b6;color:#fff}
+button:disabled{background:#d1d5db;cursor:default}
+.signal{border-radius:14px;padding:18px;margin-top:14px;border:2px solid}
+.signal.green{background:#f0fdf4;border-color:#86efac;color:#166534}
+.signal.yellow{background:#fefce8;border-color:#fde047;color:#854d0e}
+.signal.red{background:#fff1f2;border-color:#fda4af;color:#9f1239}
+.signal-head{font-size:20px;font-weight:700;margin-bottom:8px}
+.ai-result{background:#f0fdf4;border:2px solid #86efac;border-radius:14px;padding:18px;margin-top:14px;font-size:17px;line-height:1.8;color:#166534;white-space:pre-wrap;display:none}
+.api-box{background:#fef3c7;border:2px solid #fcd34d;border-radius:14px;padding:16px;margin-bottom:14px}
+.api-box p{color:#92400e;font-size:16px;margin-bottom:10px;line-height:1.6}
+.api-row{display:flex;gap:8px}
+.api-row input{flex:1;font-size:15px;padding:10px 14px}
+.api-row button{padding:10px 16px;font-size:15px;border-radius:10px;background:#f59e0b;color:#fff;white-space:nowrap;font-weight:700}
+.api-ok{font-size:14px;color:#aaa;margin-bottom:12px}
+.chat-log{display:flex;flex-direction:column;gap:12px;margin-bottom:14px;max-height:380px;overflow-y:auto}
+.msg{display:flex;gap:8px;align-items:flex-end}
 .msg.user{flex-direction:row-reverse}
-.msg-bubble{max-width:78%;border-radius:20px;padding:14px 18px;font-size:17px;line-height:1.75;white-space:pre-wrap}
-.msg.assistant .msg-bubble{background:#f3f4f6;color:#333;border-bottom-left-radius:4px}
-.msg.user .msg-bubble{background:#f59e0b;color:#fff;border-bottom-right-radius:4px}
-.msg-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.msg.assistant .msg-avatar{background:#fef3c7}
-.msg.user .msg-avatar{background:#fde68a}
-.chat-input-row{display:flex;gap:10px}
-.chat-input{flex:1;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;resize:none;font-family:inherit;line-height:1.5}
-.chat-send{background:#f472b6;color:#fff;border:none;border-radius:16px;padding:14px 20px;font-size:20px;cursor:pointer;align-self:flex-end}
-.chat-send:disabled{background:#e5e7eb;cursor:default}
-.quick-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.qbtn{background:#fff7ed;border:1px solid #fde68a;color:#92400e;border-radius:20px;padding:8px 16px;font-size:15px;cursor:pointer;font-family:inherit}
-.api-banner{background:#fef3c7;border:2px solid #fcd34d;border-radius:18px;padding:18px;margin-bottom:16px}
-.api-banner p{font-size:16px;color:#92400e;margin-bottom:12px;line-height:1.6}
-.api-input-row{display:flex;gap:8px}
-.api-input{flex:1;border:2px solid #fcd34d;border-radius:12px;padding:10px 14px;font-size:15px;outline:none;font-family:inherit}
-.api-save-btn{background:#f59e0b;color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
-.glossary{display:flex;flex-direction:column;gap:10px}
-.term{border:1px solid #fde68a;border-radius:14px;overflow:hidden}
-.term-q{background:#fffbf0;padding:16px 18px;font-size:18px;font-weight:600;color:#92400e;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
-.arr{transition:transform .25s;font-size:15px;color:#ccc}
-.term-q.open .arr{transform:rotate(180deg)}
-.term-a{display:none;padding:16px 18px;font-size:17px;line-height:1.8;color:#444;background:#fff;border-top:1px solid #fde68a}
-.term-a.open{display:block}
-.memo-area{width:100%;border:2px solid #fde68a;border-radius:16px;padding:16px 18px;font-size:18px;outline:none;resize:vertical;min-height:120px;font-family:inherit;line-height:1.75;color:#333;background:#fff}
-.memo-area::placeholder{color:#ccc}
-.save-status{font-size:14px;color:#bbb;margin-top:8px;min-height:20px}
-footer{text-align:center;color:#ccc;font-size:14px;padding:20px 16px 48px;max-width:640px;margin:0 auto}
-.typing{display:inline-flex;gap:4px;align-items:center;padding:4px 0}
-.typing span{width:8px;height:8px;border-radius:50%;background:#aaa;animation:bounce 1s infinite}
-.typing span:nth-child(2){animation-delay:.15s}
-.typing span:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.bubble{max-width:80%;border-radius:18px;padding:12px 16px;font-size:17px;line-height:1.7}
+.msg.ai .bubble{background:#f3f4f6;color:#333;border-bottom-left-radius:4px}
+.msg.user .bubble{background:#f59e0b;color:#fff;border-bottom-right-radius:4px}
+.av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:#fef3c7}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.quick button{background:#fff7ed;border:1px solid #fde68a;color:#92400e;border-radius:18px;padding:7px 14px;font-size:14px;font-weight:normal}
+.chat-row{display:flex;gap:8px}
+.chat-row textarea{flex:1;resize:none;min-height:52px;padding:12px 16px;font-size:17px;border-radius:14px}
+.chat-row .pb{align-self:flex-end;padding:12px 18px;font-size:19px;border-radius:14px}
+.term{border:1px solid #fde68a;border-radius:12px;overflow:hidden;margin-bottom:8px}
+.tq{background:#fffbf0;padding:14px 16px;font-size:17px;font-weight:600;color:#92400e;cursor:pointer;display:flex;justify-content:space-between}
+.ta{display:none;padding:14px 16px;font-size:16px;line-height:1.7;color:#444;border-top:1px solid #fde68a}
+.save-msg{font-size:13px;color:#bbb;margin-top:6px;min-height:18px}
+footer{text-align:center;color:#bbb;font-size:13px;padding:16px;max-width:640px;margin:0 auto}
+.typing{display:inline-flex;gap:4px;align-items:center}
+.typing span{width:7px;height:7px;background:#aaa;border-radius:50%;animation:blink 1s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
 </style>
 </head>
 <body>
-<header>
-  <h1>🌸 お母さんの投資相談室</h1>
-</header>
+<header><h1>🌸 お母さんの投資相談室</h1></header>
 <main>
-  <div class="card">
-    <div class="card-title">💰 投資シミュレーター</div>
-    <div class="card-sub">銘柄名と金額を入れると、AIが分析してくれます</div>
-    <div id="sim-api-banner"></div>
-    <div class="sim-row">
-      <input class="sim-input" type="text" id="sim-ticker" placeholder="銘柄名（例：トヨタ）" />
-      <input class="sim-input" type="number" id="sim-amount" placeholder="金額（万円）" min="1" />
-    </div>
-    <button class="sim-btn" id="sim-btn" onclick="runSimulation()">AIに分析してもらう 🤖</button>
-    <div id="sim-result" style="display:none" class="sim-result"></div>
+<div class="card">
+  <h2>💰 投資シミュレーター</h2>
+  <p>銘柄名と金額を入れると、AIが分析してくれます</p>
+  <div id="sim-key"></div>
+  <div class="row" style="margin-bottom:12px">
+    <input type="text" id="ss" placeholder="銘柄名（例：トヨタ）">
+    <input type="number" id="sm" placeholder="金額（万円）" style="max-width:140px">
   </div>
-  <div class="card">
-    <div class="card-title">📊 銘柄チェック</div>
-    <div class="card-sub">銘柄名やコードを入れると、信号機で教えます</div>
-    <div class="input-row">
-      <input class="ticker-input" type="text" id="ticker-input" placeholder="例：トヨタ、7203、AAPL" />
-      <button class="check-btn" id="check-btn" onclick="checkSignal()">調べる</button>
-    </div>
-    <div id="signal-result"></div>
+  <button class="gb" id="sb" onclick="doSim()" style="width:100%">AIに分析してもらう 🤖</button>
+  <div class="ai-result" id="sr"></div>
+</div>
+<div class="card">
+  <h2>📊 銘柄チェック</h2>
+  <p>銘柄名を入れると信号機で教えます</p>
+  <div class="row">
+    <input type="text" id="si" placeholder="例：トヨタ、7203、AAPL">
+    <button class="ob" id="sgb" onclick="doSig()">調べる</button>
   </div>
-  <div class="card">
-    <div class="card-title">💬 サクラさんに相談</div>
-    <div class="card-sub">投資のことなら何でも、AIがやさしく答えます</div>
-    <div id="chat-api-banner"></div>
-    <div class="quick-btns">
-      <button class="qbtn" onclick="setQ('NISAについて教えて')">NISAって何？</button>
-      <button class="qbtn" onclick="setQ('moomooの使い方を教えて')">moomooの使い方</button>
-      <button class="qbtn" onclick="setQ('初心者向けの投資方法を教えて')">初心者向け投資</button>
-      <button class="qbtn" onclick="setQ('損切りのタイミングを教えて')">損切りのタイミング</button>
-    </div>
-    <div class="chat-messages" id="chat-messages">
-      <div class="msg assistant">
-        <div class="msg-avatar">🌸</div>
-        <div class="msg-bubble">こんにちは！投資アドバイザーのサクラです😊 何でも気軽に相談してくださいね！</div>
-      </div>
-    </div>
-    <div class="chat-input-row">
-      <textarea class="chat-input" id="chat-input" placeholder="質問を入力してください..." rows="2"></textarea>
-      <button class="chat-send" id="chat-send" onclick="sendChat()">送信</button>
-    </div>
+  <div id="sgr"></div>
+</div>
+<div class="card">
+  <h2>💬 サクラさんに相談</h2>
+  <p>何でも気軽に聞いてください</p>
+  <div id="chat-key"></div>
+  <div class="quick">
+    <button onclick="setQ('NISAについて教えて')">NISAって何？</button>
+    <button onclick="setQ('moomooの使い方を教えて')">moomooの使い方</button>
+    <button onclick="setQ('初心者向けの投資方法を教えて')">初心者向け投資</button>
+    <button onclick="setQ('損切りのタイミングを教えて')">損切りのタイミング</button>
   </div>
-  <div class="card">
-    <div class="card-title">📖 投資用語を調べる</div>
-    <div class="card-sub">よく出てくる言葉をやさしく説明します</div>
-    <div class="glossary" id="glossary-list"></div>
+  <div class="chat-log" id="cl">
+    <div class="msg ai"><div class="av">🌸</div><div class="bubble">こんにちは！投資アドバイザーのサクラです😊 何でも気軽に相談してくださいね！</div></div>
   </div>
-  <div class="card">
-    <div class="card-title">📝 メモ帳</div>
-    <div class="card-sub">気になる銘柄や確認したいことを書いておけます（自動保存）</div>
-    <textarea class="memo-area" id="memo-area" placeholder="例：トヨタを100株持っている。配当は3月と9月..."></textarea>
-    <div class="save-status" id="save-status"></div>
+  <div class="chat-row">
+    <textarea id="ci" placeholder="質問を入力..." rows="2"></textarea>
+    <button class="pb" id="cb" onclick="doChat()">送信</button>
   </div>
+</div>
+<div class="card">
+  <h2>📖 投資用語を調べる</h2>
+  <p>よく出てくる言葉をやさしく説明します</p>
+  <div id="terms"></div>
+</div>
+<div class="card">
+  <h2>📝 メモ帳</h2>
+  <p>気になる銘柄などを書いておけます（自動保存）</p>
+  <textarea id="memo" placeholder="例：トヨタを100株持っている..." rows="4"></textarea>
+  <div class="save-msg" id="sm2"></div>
+</div>
 </main>
-<footer>※ このサービスは投資助言ではありません。AIの回答は参考情報です。最終判断はご自身でお願いします。</footer>
+<footer>※ このサービスは投資助言ではありません。AIの回答は参考情報です。</footer>
 <script>
-var chatHistory=[];
-function getApiKey(){return localStorage.getItem('okaasan_apikey')||'';}
-function saveApiKey(k){localStorage.setItem('okaasan_apikey',k);}
-function apiBanner(id){
-  var k=getApiKey();var el=document.getElementById(id);
-  if(!k){
-    el.innerHTML='<div class="api-banner"><p>🔑 AIを使うにはAPIキーの設定が必要です。<br>（一度設定すればずっと使えます）</p><div class="api-input-row"><input class="api-input" id="'+id+'-key" placeholder="sk-ant-..." type="password"/><button class="api-save-btn" onclick="doSaveKey(''+id+'')">保存する</button></div></div>';
-  } else {
-    el.innerHTML='<p style="font-size:14px;color:#aaa;margin-bottom:12px">✅ AIキー設定済み　<button onclick="clearKey()" style="font-size:13px;color:#aaa;background:none;border:none;cursor:pointer;text-decoration:underline">変更する</button></p>';
+function gk(){return localStorage.getItem('ak')||'';}
+function sk2(k){localStorage.setItem('ak',k);}
+function kb(id){
+  var el=document.getElementById(id);
+  if(!gk()){
+    el.innerHTML='<div class="api-box"><p>🔑 AIを使うにはAPIキーが必要です（一度入れればずっと使えます）</p><div class="api-row"><input type="password" id="'+id+'k" placeholder="sk-ant-..."><button onclick="svk(''+id+'')">保存</button></div></div>';
+  }else{
+    el.innerHTML='<div class="api-ok">✅ AIキー設定済み　<a href="#" onclick="dk();return false;" style="color:#aaa;font-size:13px">変更する</a></div>';
   }
 }
-function doSaveKey(id){
-  var val=document.getElementById(id+'-key').value.trim();
-  if(val.startsWith('sk-ant-')){saveApiKey(val);location.reload();}
-  else{alert('APIキーは sk-ant- で始まる文字列を入力してください');}
+function svk(id){
+  var v=document.getElementById(id+'k').value.trim();
+  if(!v.startsWith('sk-ant-')){alert('sk-ant- で始まるキーを入力してください');return;}
+  sk2(v);location.reload();
 }
-function clearKey(){localStorage.removeItem('okaasan_apikey');location.reload();}
-window.addEventListener('DOMContentLoaded',function(){
-  apiBanner('sim-api-banner');
-  apiBanner('chat-api-banner');
-  var sv=localStorage.getItem('okaasan_memo');
-  if(sv)document.getElementById('memo-area').value=sv;
-  buildGlossary();
-});
-async function callAI(messages){
-  var key=getApiKey();
-  if(!key){return 'APIキーが設定されていません。上の入力欄からAPIキーを入力してください。';}
+function dk(){localStorage.removeItem('ak');location.reload();}
+async function callai(msgs){
+  var k=gk();
+  if(!k)return 'APIキーが設定されていません。上の入力欄から設定してください。';
   try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1024,system:'あなたは投資アドバイザーの「サクラ」です。moomoo証券を使う投資初心者のお母さんに対して、やさしく丁寧に答えてください。専門用語は使わず、わかりやすい言葉で説明してください。投資の断言はせず、参考情報として伝えてください。回答は短めにまとめてください。',messages:messages})
+      headers:{'Content-Type':'application/json','x-api-key':k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1024,system:'あなたは投資アドバイザーの「サクラ」です。moomoo証券を使う投資初心者のお母さんにやさしく丁寧に答えてください。専門用語は使わず、わかりやすく説明してください。投資の断言はせず、参考情報として伝えてください。',messages:msgs})
     });
-    var data=await res.json();
-    if(data.error)return 'エラー: '+data.error.message;
-    return data.content[0].text;
+    var d=await r.json();
+    if(d.error)return 'エラー: '+d.error.message;
+    return d.content[0].text;
   }catch(e){return 'エラーが発生しました。APIキーを確認してください。';}
 }
-async function runSimulation(){
-  var ticker=document.getElementById('sim-ticker').value.trim();
-  var amount=document.getElementById('sim-amount').value.trim();
-  if(!ticker||!amount){alert('銘柄名と金額を両方入力してください');return;}
-  var btn=document.getElementById('sim-btn');btn.disabled=true;btn.textContent='AIが分析中...';
-  var resultEl=document.getElementById('sim-result');resultEl.style.display='block';resultEl.textContent='分析中です...しばらくお待ちください';
-  var prompt=ticker+'に'+amount+'万円を投資する場合について教えてください。①この銘柄の特徴とリスク ②'+amount+'万円投資した場合の配当・利益シナリオ（楽観・中立・慎重の3パターン） ③初心者へのアドバイス。最後に「これは参考情報であり投資の保証ではありません」と伝えてください。';
-  var reply=await callAI([{role:'user',content:prompt}]);
-  resultEl.textContent=reply;btn.disabled=false;btn.textContent='AIに分析してもらう 🤖';
+async function doSim(){
+  var s=document.getElementById('ss').value.trim();
+  var m=document.getElementById('sm').value.trim();
+  if(!s||!m){alert('銘柄名と金額を入力してください');return;}
+  var btn=document.getElementById('sb');btn.disabled=true;btn.textContent='分析中...';
+  var el=document.getElementById('sr');el.style.display='block';el.textContent='AIが分析しています...';
+  var rep=await callai([{role:'user',content:s+'に'+m+'万円を投資する場合について教えてください。①この銘柄の特徴とリスク ②'+m+'万円投資した場合の配当・利益シナリオ（楽観・中立・慎重の3パターン） ③初心者へのアドバイス。最後に「これは参考情報であり投資の保証ではありません」と必ず伝えてください。'}]);
+  el.textContent=rep;btn.disabled=false;btn.textContent='AIに分析してもらう 🤖';
 }
-var SIGNALS={green:{cls:'green',dot:'g',label:'🟢 青信号（買い検討）',msg:'比較的買いやすいタイミングかもしれません。余裕資金の範囲で少額から始めましょう。'},yellow:{cls:'yellow',dot:'y',label:'🟡 黄信号（様子見）',msg:'もう少し情報を集めてから判断しましょう。急がなくて大丈夫です。'},red:{cls:'red',dot:'r',label:'🔴 赤信号（注意）',msg:'今は慎重に。焦らず状況が落ち着くのを待ちましょう。'}};
-function checkSignal(){
-  var t=document.getElementById('ticker-input').value.trim();if(!t)return;
-  var btn=document.getElementById('check-btn');btn.disabled=true;btn.textContent='調べ中...';
+var SG={green:{cls:'green',lb:'🟢 青信号（買い検討）',mg:'比較的買いやすいタイミングかもしれません。余裕資金の範囲で少額から始めましょう。'},yellow:{cls:'yellow',lb:'🟡 黄信号（様子見）',mg:'もう少し情報を集めてから判断しましょう。急がなくて大丈夫です。'},red:{cls:'red',lb:'🔴 赤信号（注意）',mg:'今は慎重に。焦らず状況が落ち着くのを待ちましょう。'}};
+function doSig(){
+  var t=document.getElementById('si').value.trim();if(!t)return;
+  var btn=document.getElementById('sgb');btn.disabled=true;btn.textContent='調べ中...';
   setTimeout(function(){
-    var keys=['green','yellow','red'];
-    var s=SIGNALS[keys[t.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)%3]];
-    document.getElementById('signal-result').innerHTML='<div class="signal-box '+s.cls+'"><div class="signal-head"><div class="dot '+s.dot+'"></div>'+s.label+'</div><div class="signal-msg">'+s.msg+'</div><div class="signal-note">※参考情報です。投資は自己判断で。</div></div>';
+    var ks=['green','yellow','red'];
+    var s=SG[ks[t.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)%3]];
+    document.getElementById('sgr').innerHTML='<div class="signal '+s.cls+'"><div class="signal-head">'+s.lb+'</div>'+s.mg+'<div style="font-size:13px;opacity:.6;margin-top:8px">※参考情報です。投資は自己判断で。</div></div>';
     btn.disabled=false;btn.textContent='調べる';
-  },800);
+  },700);
 }
-document.addEventListener('DOMContentLoaded',function(){document.getElementById('ticker-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkSignal();});});
-function setQ(q){document.getElementById('chat-input').value=q;}
-async function sendChat(){
-  var input=document.getElementById('chat-input');var text=input.value.trim();if(!text)return;
-  var sendBtn=document.getElementById('chat-send');sendBtn.disabled=true;input.value='';
-  appendMsg('user',text);chatHistory.push({role:'user',content:text});
-  var typingId=appendTyping();
-  var reply=await callAI(chatHistory.slice(-10));
-  removeTyping(typingId);chatHistory.push({role:'assistant',content:reply});
-  appendMsg('assistant',reply);sendBtn.disabled=false;scrollChat();
+document.getElementById('si').addEventListener('keydown',function(e){if(e.key==='Enter')doSig();});
+var hist=[];
+function setQ(q){document.getElementById('ci').value=q;}
+async function doChat(){
+  var inp=document.getElementById('ci');var txt=inp.value.trim();if(!txt)return;
+  var btn=document.getElementById('cb');btn.disabled=true;inp.value='';
+  addm('user',txt);hist.push({role:'user',content:txt});
+  var tid=addt();
+  var rep=await callai(hist.slice(-10));
+  rmt(tid);hist.push({role:'assistant',content:rep});
+  addm('ai',rep);btn.disabled=false;scc();
 }
-document.addEventListener('DOMContentLoaded',function(){
-  document.getElementById('chat-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
-});
-function appendMsg(role,text){
-  var div=document.createElement('div');div.className='msg '+role;
-  div.innerHTML='<div class="msg-avatar">'+(role==='assistant'?'🌸':'👩')+'</div><div class="msg-bubble">'+escHtml(text)+'</div>';
-  document.getElementById('chat-messages').appendChild(div);scrollChat();
+document.getElementById('ci').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doChat();}});
+function addm(r,t){
+  var d=document.createElement('div');d.className='msg '+r;
+  d.innerHTML='<div class="av">'+(r==='ai'?'🌸':'👩')+'</div><div class="bubble">'+esc(t)+'</div>';
+  document.getElementById('cl').appendChild(d);scc();
 }
-function appendTyping(){
-  var id='t'+Date.now();var div=document.createElement('div');div.className='msg assistant';div.id=id;
-  div.innerHTML='<div class="msg-avatar">🌸</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
-  document.getElementById('chat-messages').appendChild(div);scrollChat();return id;
+function addt(){
+  var id='t'+Date.now();var d=document.createElement('div');d.className='msg ai';d.id=id;
+  d.innerHTML='<div class="av">🌸</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  document.getElementById('cl').appendChild(d);scc();return id;
 }
-function removeTyping(id){var el=document.getElementById(id);if(el)el.remove();}
-function scrollChat(){var el=document.getElementById('chat-messages');el.scrollTop=el.scrollHeight;}
-function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
+function rmt(id){var e=document.getElementById(id);if(e)e.remove();}
+function scc(){var e=document.getElementById('cl');e.scrollTop=e.scrollHeight;}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
 /g,'<br>');}
-var TERMS=[{q:'NISAって何ですか？',a:'利益に税金がかからない国の制度です。2024年から新NISAになり、年間360万円まで非課税で投資できます。'},{q:'分散投資とは？',a:'複数の銘柄に分けて持つことでリスクを減らす考え方です。moomooの投資信託を使うと自動で分散できます。'},{q:'配当金とは？',a:'会社が利益の一部を株主に分けてくれるお金です。年1〜2回振り込まれます。'},{q:'損切りとは？',a:'損失が広がる前に株を売ることです。買う前に「ここまで下がったら売る」と決めておきましょう。'},{q:'投資信託とは？',a:'プロが代わりに運用してくれる商品です。1万円から始められmoomooでも買えます。'},{q:'moomooで株を買うには？',a:'①アプリを開く②銘柄検索③取引ボタン④買い・数量・価格入力⑤注文確認→確定。初めては成行注文が簡単です。'},{q:'株価が下がったら？',a:'冷静に。長期投資なら少しの下落は気にしなくて大丈夫。夜眠れないほど不安なら投資額を減らすサインです。'},{q:'PERって何？',a:'株が割安か割高かを見る目安です。低いほど割安。日本株平均は15倍前後です。'}];
-function buildGlossary(){
-  var gl=document.getElementById('glossary-list');
-  TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">▼</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
-}
-function toggleTerm(i){document.getElementById('tq'+i).classList.toggle('open');document.getElementById('ta'+i).classList.toggle('open');}
-var st;
-document.addEventListener('DOMContentLoaded',function(){
-  document.getElementById('memo-area').addEventListener('input',function(){
-    clearTimeout(st);document.getElementById('save-status').textContent='保存中...';
-    st=setTimeout(function(){localStorage.setItem('okaasan_memo',document.getElementById('memo-area').value);document.getElementById('save-status').textContent='✓ 保存しました';},700);
-  });
+var TR=[
+  {q:'NISAって何ですか？',a:'利益に税金がかからない国の制度です。2024年から新NISAになり、年間360万円まで非課税で投資できます。'},
+  {q:'分散投資とは？',a:'複数の銘柄に分けて持つことでリスクを減らす考え方です。moomooの投資信託を使うと自動で分散できます。'},
+  {q:'配当金とは？',a:'会社が利益の一部を株主に分けてくれるお金です。年1〜2回振り込まれます。'},
+  {q:'損切りとは？',a:'損失が広がる前に株を売ることです。買う前に「ここまで下がったら売る」と決めておきましょう。'},
+  {q:'投資信託とは？',a:'プロが代わりに運用してくれる商品です。1万円から始められmoomooでも買えます。'},
+  {q:'moomooで株を買うには？',a:'①アプリを開く②銘柄検索③取引ボタン④買い・数量・価格を入力⑤注文確認→確定。初めては成行注文が簡単です。'},
+  {q:'株価が下がったら？',a:'冷静に。長期投資なら少しの下落は気にしなくて大丈夫。夜眠れないほど不安なら投資額を減らすサインです。'},
+  {q:'PERって何？',a:'株が割安か割高かを見る目安です。低いほど割安。日本株平均は15倍前後です。'}
+];
+var tel=document.getElementById('terms');
+TR.forEach(function(t,i){
+  var d=document.createElement('div');d.className='term';
+  d.innerHTML='<div class="tq" onclick="tog('+i+')">'+t.q+'<span id="ar'+i+'">▼</span></div><div class="ta" id="ta'+i+'">'+t.a+'</div>';
+  tel.appendChild(d);
 });
+function tog(i){
+  var ta=document.getElementById('ta'+i);var ar=document.getElementById('ar'+i);
+  var open=ta.style.display==='block';
+  ta.style.display=open?'none':'block';ar.textContent=open?'▼':'▲';
+}
+var sv=localStorage.getItem('memo');if(sv)document.getElementById('memo').value=sv;
+var stx;
+document.getElementById('memo').addEventListener('input',function(){
+  clearTimeout(stx);document.getElementById('sm2').textContent='保存中...';
+  stx=setTimeout(function(){localStorage.setItem('memo',document.getElementById('memo').value);document.getElementById('sm2').textContent='✓ 保存しました';},700);
+});
+kb('sim-key');kb('chat-key');
 </script>
 </body>
 </html>
