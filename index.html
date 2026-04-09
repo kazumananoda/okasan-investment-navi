@@ -7,19 +7,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:18px;background:#fffbf5;color:#333;min-height:100vh}
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(160deg,#fff8ee,#ffecd8)}
-#main-screen{display:none}
-.login-box{background:#fff;border-radius:28px;padding:48px 36px;width:90%;max-width:420px;text-align:center;box-shadow:0 4px 32px rgba(0,0,0,0.08)}
-.flower{font-size:64px;display:block;margin-bottom:12px}
-.login-box h1{font-size:26px;color:#b45309;margin-bottom:8px;font-weight:700}
-.login-desc{color:#888;font-size:17px;margin-bottom:28px}
-.pw-input{width:100%;border:2px solid #fcd34d;border-radius:18px;padding:16px 20px;font-size:20px;text-align:center;outline:none;margin-bottom:12px;font-family:inherit}
-.pw-err{color:#dc2626;font-size:16px;margin-bottom:12px;min-height:22px}
-.login-btn{width:100%;background:#f59e0b;color:#fff;border:none;border-radius:18px;padding:18px;font-size:20px;font-weight:700;cursor:pointer;font-family:inherit}
-.hint{color:#ccc;font-size:15px;margin-top:18px}
-header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #fde68a;position:sticky;top:0;z-index:10}
-header h1{font-size:20px;color:#92400e;font-weight:700}
-.logout-btn{color:#aaa;background:none;border:1px solid #ddd;border-radius:20px;padding:8px 18px;font-size:15px;cursor:pointer;font-family:inherit}
+header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:center;border-bottom:2px solid #fde68a;position:sticky;top:0;z-index:10}
+header h1{font-size:22px;color:#92400e;font-weight:700}
 main{max-width:640px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
 .card{background:#fff;border-radius:24px;padding:26px;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
 .card-title{font-size:22px;color:#92400e;font-weight:700;margin-bottom:6px}
@@ -81,87 +70,75 @@ footer{text-align:center;color:#ccc;font-size:14px;padding:20px 16px 48px;max-wi
 </style>
 </head>
 <body>
-<div id="login-screen">
-  <div class="login-box">
-    <span class="flower">🌸</span>
-    <h1>お母さんの投資相談室</h1>
-    <p class="login-desc">合言葉を入力してください</p>
-    <input class="pw-input" type="password" id="pw-input" placeholder="合言葉" />
-    <div class="pw-err" id="pw-err"></div>
-    <button class="login-btn" onclick="doLogin()">入る 🚪</button>
-    <p class="hint">合言葉は「sakura2024」です</p>
+<header>
+  <h1>🌸 お母さんの投資相談室</h1>
+</header>
+<main>
+  <div class="card">
+    <div class="card-title">💰 投資シミュレーター</div>
+    <div class="card-sub">銘柄名と金額を入れると、AIが分析してくれます</div>
+    <div id="sim-api-banner"></div>
+    <div class="sim-row">
+      <input class="sim-input" type="text" id="sim-ticker" placeholder="銘柄名（例：トヨタ）" />
+      <input class="sim-input" type="number" id="sim-amount" placeholder="金額（万円）" min="1" />
+    </div>
+    <button class="sim-btn" id="sim-btn" onclick="runSimulation()">AIに分析してもらう 🤖</button>
+    <div id="sim-result" style="display:none" class="sim-result"></div>
   </div>
-</div>
-<div id="main-screen">
-  <header>
-    <h1>🌸 お母さんの投資相談室</h1>
-    <button class="logout-btn" onclick="doLogout()">ログアウト</button>
-  </header>
-  <main>
-    <div class="card">
-      <div class="card-title">💰 投資シミュレーター</div>
-      <div class="card-sub">銘柄名と金額を入れると、AIが分析してくれます</div>
-      <div id="sim-api-banner"></div>
-      <div class="sim-row">
-        <input class="sim-input" type="text" id="sim-ticker" placeholder="銘柄名（例：トヨタ）" />
-        <input class="sim-input" type="number" id="sim-amount" placeholder="金額（万円）" min="1" />
-      </div>
-      <button class="sim-btn" id="sim-btn" onclick="runSimulation()">AIに分析してもらう 🤖</button>
-      <div id="sim-result" style="display:none" class="sim-result"></div>
+  <div class="card">
+    <div class="card-title">📊 銘柄チェック</div>
+    <div class="card-sub">銘柄名やコードを入れると、信号機で教えます</div>
+    <div class="input-row">
+      <input class="ticker-input" type="text" id="ticker-input" placeholder="例：トヨタ、7203、AAPL" />
+      <button class="check-btn" id="check-btn" onclick="checkSignal()">調べる</button>
     </div>
-    <div class="card">
-      <div class="card-title">📊 銘柄チェック</div>
-      <div class="card-sub">銘柄名やコードを入れると、信号機で教えます</div>
-      <div class="input-row">
-        <input class="ticker-input" type="text" id="ticker-input" placeholder="例：トヨタ、7203、AAPL" />
-        <button class="check-btn" id="check-btn" onclick="checkSignal()">調べる</button>
-      </div>
-      <div id="signal-result"></div>
+    <div id="signal-result"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">💬 サクラさんに相談</div>
+    <div class="card-sub">投資のことなら何でも、AIがやさしく答えます</div>
+    <div id="chat-api-banner"></div>
+    <div class="quick-btns">
+      <button class="qbtn" onclick="setQ('NISAについて教えて')">NISAって何？</button>
+      <button class="qbtn" onclick="setQ('moomooの使い方を教えて')">moomooの使い方</button>
+      <button class="qbtn" onclick="setQ('初心者向けの投資方法を教えて')">初心者向け投資</button>
+      <button class="qbtn" onclick="setQ('損切りのタイミングを教えて')">損切りのタイミング</button>
     </div>
-    <div class="card">
-      <div class="card-title">💬 サクラさんに相談</div>
-      <div class="card-sub">投資のことなら何でも、AIがやさしく答えます</div>
-      <div id="chat-api-banner"></div>
-      <div class="quick-btns">
-        <button class="qbtn" onclick="setQ('NISAについて教えて')">NISAって何？</button>
-        <button class="qbtn" onclick="setQ('moomooの使い方を教えて')">moomooの使い方</button>
-        <button class="qbtn" onclick="setQ('初心者向けの投資方法を教えて')">初心者向け投資</button>
-        <button class="qbtn" onclick="setQ('損切りのタイミングを教えて')">損切りのタイミング</button>
-      </div>
-      <div class="chat-messages" id="chat-messages">
-        <div class="msg assistant">
-          <div class="msg-avatar">🌸</div>
-          <div class="msg-bubble">こんにちは！投資アドバイザーのサクラです😊 何でも気軽に相談してくださいね！</div>
-        </div>
-      </div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="chat-input" placeholder="質問を入力してください..." rows="2"></textarea>
-        <button class="chat-send" id="chat-send" onclick="sendChat()">送信</button>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg assistant">
+        <div class="msg-avatar">🌸</div>
+        <div class="msg-bubble">こんにちは！投資アドバイザーのサクラです😊 何でも気軽に相談してくださいね！</div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-title">📖 投資用語を調べる</div>
-      <div class="card-sub">よく出てくる言葉をやさしく説明します</div>
-      <div class="glossary" id="glossary-list"></div>
+    <div class="chat-input-row">
+      <textarea class="chat-input" id="chat-input" placeholder="質問を入力してください..." rows="2"></textarea>
+      <button class="chat-send" id="chat-send" onclick="sendChat()">送信</button>
     </div>
-    <div class="card">
-      <div class="card-title">📝 メモ帳</div>
-      <div class="card-sub">気になる銘柄や確認したいことを書いておけます（自動保存）</div>
-      <textarea class="memo-area" id="memo-area" placeholder="例：トヨタを100株持っている。配当は3月と9月..."></textarea>
-      <div class="save-status" id="save-status"></div>
-    </div>
-  </main>
-  <footer>※ このサービスは投資助言ではありません。AIの回答は参考情報です。最終判断はご自身でお願いします。</footer>
-</div>
+  </div>
+  <div class="card">
+    <div class="card-title">📖 投資用語を調べる</div>
+    <div class="card-sub">よく出てくる言葉をやさしく説明します</div>
+    <div class="glossary" id="glossary-list"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📝 メモ帳</div>
+    <div class="card-sub">気になる銘柄や確認したいことを書いておけます（自動保存）</div>
+    <textarea class="memo-area" id="memo-area" placeholder="例：トヨタを100株持っている。配当は3月と9月..."></textarea>
+    <div class="save-status" id="save-status"></div>
+  </div>
+</main>
+<footer>※ このサービスは投資助言ではありません。AIの回答は参考情報です。最終判断はご自身でお願いします。</footer>
 <script>
-var PW='sakura2024';
 var chatHistory=[];
 function getApiKey(){return localStorage.getItem('okaasan_apikey')||'';}
 function saveApiKey(k){localStorage.setItem('okaasan_apikey',k);}
 function apiBanner(id){
   var k=getApiKey();var el=document.getElementById(id);
-  if(!k){el.innerHTML='<div class="api-banner"><p>🔑 AIを使うには、AnthropicのAPIキーを設定してください（一度設定すればずっと使えます）</p><div class="api-input-row"><input class="api-input" id="'+id+'-key" placeholder="sk-ant-..." type="password"/><button class="api-save-btn" onclick="doSaveKey(''+id+'')">保存する</button></div></div>';}
-  else{el.innerHTML='<p style="font-size:14px;color:#aaa;margin-bottom:12px">✅ APIキー設定済み　<button onclick="clearKey()" style="font-size:13px;color:#aaa;background:none;border:none;cursor:pointer;text-decoration:underline">変更する</button></p>';}
+  if(!k){
+    el.innerHTML='<div class="api-banner"><p>🔑 AIを使うにはAPIキーの設定が必要です。<br>（一度設定すればずっと使えます）</p><div class="api-input-row"><input class="api-input" id="'+id+'-key" placeholder="sk-ant-..." type="password"/><button class="api-save-btn" onclick="doSaveKey(''+id+'')">保存する</button></div></div>';
+  } else {
+    el.innerHTML='<p style="font-size:14px;color:#aaa;margin-bottom:12px">✅ AIキー設定済み　<button onclick="clearKey()" style="font-size:13px;color:#aaa;background:none;border:none;cursor:pointer;text-decoration:underline">変更する</button></p>';
+  }
 }
 function doSaveKey(id){
   var val=document.getElementById(id+'-key').value.trim();
@@ -169,27 +146,16 @@ function doSaveKey(id){
   else{alert('APIキーは sk-ant- で始まる文字列を入力してください');}
 }
 function clearKey(){localStorage.removeItem('okaasan_apikey');location.reload();}
-function doLogin(){
-  if(document.getElementById('pw-input').value===PW){
-    localStorage.setItem('okaasan_auth','ok');showMain();
-  }else{document.getElementById('pw-err').textContent='合言葉が違います。もう一度試してください。';}
-}
-function showMain(){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('main-screen').style.display='block';
-  apiBanner('sim-api-banner');apiBanner('chat-api-banner');
-}
-function doLogout(){
-  localStorage.removeItem('okaasan_auth');
-  document.getElementById('main-screen').style.display='none';
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('pw-input').value='';
-  document.getElementById('pw-err').textContent='';
-}
-document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+window.addEventListener('DOMContentLoaded',function(){
+  apiBanner('sim-api-banner');
+  apiBanner('chat-api-banner');
+  var sv=localStorage.getItem('okaasan_memo');
+  if(sv)document.getElementById('memo-area').value=sv;
+  buildGlossary();
+});
 async function callAI(messages){
   var key=getApiKey();
-  if(!key){return 'APIキーが設定されていません。上の設定からAPIキーを入力してください。';}
+  if(!key){return 'APIキーが設定されていません。上の入力欄からAPIキーを入力してください。';}
   try{
     var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
@@ -222,7 +188,7 @@ function checkSignal(){
     btn.disabled=false;btn.textContent='調べる';
   },800);
 }
-document.getElementById('ticker-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkSignal();});
+document.addEventListener('DOMContentLoaded',function(){document.getElementById('ticker-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkSignal();});});
 function setQ(q){document.getElementById('chat-input').value=q;}
 async function sendChat(){
   var input=document.getElementById('chat-input');var text=input.value.trim();if(!text)return;
@@ -233,7 +199,9 @@ async function sendChat(){
   removeTyping(typingId);chatHistory.push({role:'assistant',content:reply});
   appendMsg('assistant',reply);sendBtn.disabled=false;scrollChat();
 }
-document.getElementById('chat-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('chat-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
+});
 function appendMsg(role,text){
   var div=document.createElement('div');div.className='msg '+role;
   div.innerHTML='<div class="msg-avatar">'+(role==='assistant'?'🌸':'👩')+'</div><div class="msg-bubble">'+escHtml(text)+'</div>';
@@ -249,12 +217,18 @@ function scrollChat(){var el=document.getElementById('chat-messages');el.scrollT
 function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
 /g,'<br>');}
 var TERMS=[{q:'NISAって何ですか？',a:'利益に税金がかからない国の制度です。2024年から新NISAになり、年間360万円まで非課税で投資できます。'},{q:'分散投資とは？',a:'複数の銘柄に分けて持つことでリスクを減らす考え方です。moomooの投資信託を使うと自動で分散できます。'},{q:'配当金とは？',a:'会社が利益の一部を株主に分けてくれるお金です。年1〜2回振り込まれます。'},{q:'損切りとは？',a:'損失が広がる前に株を売ることです。買う前に「ここまで下がったら売る」と決めておきましょう。'},{q:'投資信託とは？',a:'プロが代わりに運用してくれる商品です。1万円から始められmoomooでも買えます。'},{q:'moomooで株を買うには？',a:'①アプリを開く②銘柄検索③取引ボタン④買い・数量・価格入力⑤注文確認→確定。初めては成行注文が簡単です。'},{q:'株価が下がったら？',a:'冷静に。長期投資なら少しの下落は気にしなくて大丈夫。夜眠れないほど不安なら投資額を減らすサインです。'},{q:'PERって何？',a:'株が割安か割高かを見る目安です。低いほど割安。日本株平均は15倍前後です。'}];
-var gl=document.getElementById('glossary-list');
-TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">▼</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
+function buildGlossary(){
+  var gl=document.getElementById('glossary-list');
+  TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">▼</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
+}
 function toggleTerm(i){document.getElementById('tq'+i).classList.toggle('open');document.getElementById('ta'+i).classList.toggle('open');}
-var memo=document.getElementById('memo-area');var sv=localStorage.getItem('okaasan_memo');if(sv)memo.value=sv;
-var st;memo.addEventListener('input',function(){clearTimeout(st);document.getElementById('save-status').textContent='保存中...';st=setTimeout(function(){localStorage.setItem('okaasan_memo',memo.value);document.getElementById('save-status').textContent='✓ 保存しました';},700);});
-if(localStorage.getItem('okaasan_auth')==='ok')showMain();
+var st;
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('memo-area').addEventListener('input',function(){
+    clearTimeout(st);document.getElementById('save-status').textContent='保存中...';
+    st=setTimeout(function(){localStorage.setItem('okaasan_memo',document.getElementById('memo-area').value);document.getElementById('save-status').textContent='✓ 保存しました';},700);
+  });
+});
 </script>
 </body>
 </html>
