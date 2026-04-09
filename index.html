@@ -20,7 +20,7 @@ body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size
 header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #fde68a;position:sticky;top:0;z-index:10}
 header h1{font-size:20px;color:#92400e;font-weight:700}
 .logout-btn{color:#aaa;background:none;border:1px solid #ddd;border-radius:20px;padding:8px 18px;font-size:15px;cursor:pointer;font-family:inherit}
-main{max-width:620px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
+main{max-width:640px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
 .card{background:#fff;border-radius:24px;padding:26px;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
 .card-title{font-size:22px;color:#92400e;font-weight:700;margin-bottom:6px}
 .card-sub{color:#999;font-size:16px;margin-bottom:18px}
@@ -37,6 +37,31 @@ main{max-width:620px;margin:0 auto;padding:24px 16px;display:flex;flex-direction
 .dot.g{background:#22c55e}.dot.y{background:#eab308}.dot.r{background:#f43f5e}
 .signal-msg{font-size:17px;line-height:1.75}
 .signal-note{font-size:14px;opacity:.6;margin-top:10px}
+.sim-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.sim-input{flex:1;min-width:140px;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;font-family:inherit}
+.sim-btn{background:#10b981;color:#fff;border:none;border-radius:16px;padding:14px 24px;font-size:18px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.sim-btn:disabled{background:#e5e7eb;cursor:default}
+.sim-result{background:#f0fdf4;border:2px solid #86efac;border-radius:18px;padding:20px;margin-top:12px;font-size:17px;line-height:1.85;color:#166534;white-space:pre-wrap}
+.chat-messages{display:flex;flex-direction:column;gap:14px;margin-bottom:16px;max-height:420px;overflow-y:auto;padding:4px}
+.msg{display:flex;align-items:flex-end;gap:8px}
+.msg.user{flex-direction:row-reverse}
+.msg-bubble{max-width:78%;border-radius:20px;padding:14px 18px;font-size:17px;line-height:1.75;white-space:pre-wrap}
+.msg.assistant .msg-bubble{background:#f3f4f6;color:#333;border-bottom-left-radius:4px}
+.msg.user .msg-bubble{background:#f59e0b;color:#fff;border-bottom-right-radius:4px}
+.msg-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.msg.assistant .msg-avatar{background:#fef3c7}
+.msg.user .msg-avatar{background:#fde68a}
+.chat-input-row{display:flex;gap:10px}
+.chat-input{flex:1;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;resize:none;font-family:inherit;line-height:1.5}
+.chat-send{background:#f472b6;color:#fff;border:none;border-radius:16px;padding:14px 20px;font-size:20px;cursor:pointer;align-self:flex-end}
+.chat-send:disabled{background:#e5e7eb;cursor:default}
+.quick-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.qbtn{background:#fff7ed;border:1px solid #fde68a;color:#92400e;border-radius:20px;padding:8px 16px;font-size:15px;cursor:pointer;font-family:inherit}
+.api-banner{background:#fef3c7;border:2px solid #fcd34d;border-radius:18px;padding:18px;margin-bottom:16px}
+.api-banner p{font-size:16px;color:#92400e;margin-bottom:12px;line-height:1.6}
+.api-input-row{display:flex;gap:8px}
+.api-input{flex:1;border:2px solid #fcd34d;border-radius:12px;padding:10px 14px;font-size:15px;outline:none;font-family:inherit}
+.api-save-btn{background:#f59e0b;color:#fff;border:none;border-radius:12px;padding:10px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
 .glossary{display:flex;flex-direction:column;gap:10px}
 .term{border:1px solid #fde68a;border-radius:14px;overflow:hidden}
 .term-q{background:#fffbf0;padding:16px 18px;font-size:18px;font-weight:600;color:#92400e;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
@@ -47,45 +72,199 @@ main{max-width:620px;margin:0 auto;padding:24px 16px;display:flex;flex-direction
 .memo-area{width:100%;border:2px solid #fde68a;border-radius:16px;padding:16px 18px;font-size:18px;outline:none;resize:vertical;min-height:120px;font-family:inherit;line-height:1.75;color:#333;background:#fff}
 .memo-area::placeholder{color:#ccc}
 .save-status{font-size:14px;color:#bbb;margin-top:8px;min-height:20px}
-footer{text-align:center;color:#ccc;font-size:14px;padding:20px 16px 48px;max-width:620px;margin:0 auto}
+footer{text-align:center;color:#ccc;font-size:14px;padding:20px 16px 48px;max-width:640px;margin:0 auto}
+.typing{display:inline-flex;gap:4px;align-items:center;padding:4px 0}
+.typing span{width:8px;height:8px;border-radius:50%;background:#aaa;animation:bounce 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
 </style>
 </head>
 <body>
 <div id="login-screen">
-<div class="login-box">
-<span class="flower">&#x1F338;</span>
-<h1>&#x304A;&#x6BCD;&#x3055;&#x3093;&#x306E;&#x6295;&#x8CC7;&#x76F8;&#x8AC7;&#x5BA4;</h1>
-<p class="login-desc">&#x5408;&#x8A00;&#x8449;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;</p>
-<input class="pw-input" type="password" id="pw-input" placeholder="&#x5408;&#x8A00;&#x8449;" />
-<div class="pw-err" id="pw-err"></div>
-<button class="login-btn" onclick="doLogin()">&#x5165;&#x308B; &#x1F6AA;</button>
-<p class="hint">&#x5408;&#x8A00;&#x8449;&#x306F;&#x300Csakura2024&#x300D;&#x3067;&#x3059;</p>
-</div>
+  <div class="login-box">
+    <span class="flower">🌸</span>
+    <h1>お母さんの投資相談室</h1>
+    <p class="login-desc">合言葉を入力してください</p>
+    <input class="pw-input" type="password" id="pw-input" placeholder="合言葉" />
+    <div class="pw-err" id="pw-err"></div>
+    <button class="login-btn" onclick="doLogin()">入る 🚪</button>
+    <p class="hint">合言葉は「sakura2024」です</p>
+  </div>
 </div>
 <div id="main-screen" class="screen">
-<header><h1>&#x1F338; &#x304A;&#x6BCD;&#x3055;&#x3093;&#x306E;&#x6295;&#x8CC7;&#x76F8;&#x8AC7;&#x5BA4;</h1><button class="logout-btn" onclick="doLogout()">&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;</button></header>
-<main>
-<div class="card"><div class="card-title">&#x1F4CA; &#x9298;&#x67C4;&#x30C1;&#x30A7;&#x30C3;&#x30AF;</div><div class="card-sub">&#x9298;&#x67C4;&#x540D;&#x3084;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x5165;&#x308C;&#x308B;&#x3068;&#x3001;&#x4FE1;&#x53F7;&#x6A5F;&#x3067;&#x6559;&#x3048;&#x307E;&#x3059;</div><div class="input-row"><input class="ticker-input" type="text" id="ticker-input" placeholder="&#x4F8B;&#xFF1A;&#x30C8;&#x30E8;&#x30BF;&#x3001;7203&#x3001;AAPL" /><button class="check-btn" id="check-btn" onclick="checkSignal()">&#x8ABF;&#x3079;&#x308B;</button></div><div id="signal-result"></div></div>
-<div class="card"><div class="card-title">&#x1F4D6; &#x6295;&#x8CC7;&#x7528;&#x8A9E;&#x3092;&#x8ABF;&#x3079;&#x308B;</div><div class="card-sub">&#x3088;&#x304F;&#x51FA;&#x3066;&#x304F;&#x308B;&#x8A00;&#x8449;&#x3092;&#x3084;&#x3055;&#x3057;&#x304F;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3059;</div><div class="glossary" id="glossary-list"></div></div>
-<div class="card"><div class="card-title">&#x1F4DD; &#x30E1;&#x30E2;&#x5E33;</div><div class="card-sub">&#x6C17;&#x306B;&#x306A;&#x308B;&#x9298;&#x67C4;&#x3084;&#x78BA;&#x8A8D;&#x3057;&#x305F;&#x3044;&#x3053;&#x3068;&#x3092;&#x66F8;&#x3044;&#x3066;&#x304A;&#x3051;&#x307E;&#x3059;&#xFF08;&#x81EA;&#x52D5;&#x4FDD;&#x5B58;&#xFF09;</div><textarea class="memo-area" id="memo-area" placeholder="&#x4F8B;&#xFF1A;&#x30C8;&#x30E8;&#x30BF;&#x3092;100&#x682A;&#x6301;&#x3063;&#x3066;&#x3044;&#x308B;..."></textarea><div class="save-status" id="save-status"></div></div>
-</main>
-<footer>&#x203B; &#x3053;&#x306E;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x306F;&#x6295;&#x8CC7;&#x52A9;&#x8A00;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x6700;&#x7D42;&#x5224;&#x65AD;&#x306F;&#x3054;&#x81EA;&#x8EAB;&#x3067;&#x304A;&#x9858;&#x3044;&#x3057;&#x307E;&#x3059;&#x3002;</footer>
+  <header>
+    <h1>🌸 お母さんの投資相談室</h1>
+    <button class="logout-btn" onclick="doLogout()">ログアウト</button>
+  </header>
+  <main>
+    <div class="card">
+      <div class="card-title">💰 投資シミュレーター</div>
+      <div class="card-sub">銘柄名と金額を入れると、AIが分析してくれます</div>
+      <div id="sim-api-banner"></div>
+      <div class="sim-row">
+        <input class="sim-input" type="text" id="sim-ticker" placeholder="銘柄名（例：トヨタ）" />
+        <input class="sim-input" type="number" id="sim-amount" placeholder="金額（万円）" min="1" />
+      </div>
+      <button class="sim-btn" id="sim-btn" onclick="runSimulation()">AIに分析してもらう 🤖</button>
+      <div id="sim-result" style="display:none" class="sim-result"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📊 銘柄チェック</div>
+      <div class="card-sub">銘柄名やコードを入れると、信号機で教えます</div>
+      <div class="input-row">
+        <input class="ticker-input" type="text" id="ticker-input" placeholder="例：トヨタ、7203、AAPL" />
+        <button class="check-btn" id="check-btn" onclick="checkSignal()">調べる</button>
+      </div>
+      <div id="signal-result"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💬 サクラさんに相談</div>
+      <div class="card-sub">投資のことなら何でも、AIがやさしく答えます</div>
+      <div id="chat-api-banner"></div>
+      <div class="quick-btns">
+        <button class="qbtn" onclick="setQ('NISAについて教えて')">NISAって何？</button>
+        <button class="qbtn" onclick="setQ('moomooの使い方を教えて')">moomooの使い方</button>
+        <button class="qbtn" onclick="setQ('初心者向けの投資方法を教えて')">初心者向け投資</button>
+        <button class="qbtn" onclick="setQ('損切りのタイミングを教えて')">損切りのタイミング</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg assistant">
+          <div class="msg-avatar">🌸</div>
+          <div class="msg-bubble">こんにちは！投資アドバイザーのサクラです😊 何でも気軽に相談してくださいね。moomoo証券のことや投資の基本まで、やさしく説明しますよ！</div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chat-input" placeholder="質問を入力してください..." rows="2"></textarea>
+        <button class="chat-send" id="chat-send" onclick="sendChat()">送信</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📖 投資用語を調べる</div>
+      <div class="card-sub">よく出てくる言葉をやさしく説明します</div>
+      <div class="glossary" id="glossary-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📝 メモ帳</div>
+      <div class="card-sub">気になる銘柄や確認したいことを書いておけます（自動保存）</div>
+      <textarea class="memo-area" id="memo-area" placeholder="例：トヨタを100株持っている。配当は3月と9月..."></textarea>
+      <div class="save-status" id="save-status"></div>
+    </div>
+  </main>
+  <footer>※ このサービスは投資助言ではありません。AIの回答は参考情報です。最終判断はご自身でお願いします。</footer>
 </div>
 <script>
 var PW='sakura2024';
-var SIGNALS={green:{cls:'green',dot:'g',label:'&#x1F7E2; &#x9752;&#x4FE1;&#x53F7;&#xFF08;&#x8CB7;&#x3044;&#x691C;&#x8A0E;&#xFF09;',msg:'&#x6BD4;&#x8F03;&#x7684;&#x8CB7;&#x3044;&#x3084;&#x3059;&#x3044;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;&#x4F59;&#x88D5;&#x8CC7;&#x91D1;&#x306E;&#x7BC4;&#x56F2;&#x3067;&#x5C11;&#x984D;&#x304B;&#x3089;&#x59CB;&#x3081;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'},yellow:{cls:'yellow',dot:'y',label:'&#x1F7E1; &#x9EC4;&#x4FE1;&#x53F7;&#xFF08;&#x69D8;&#x5B50;&#x898B;&#xFF09;',msg:'&#x3082;&#x3046;&#x5C11;&#x3057;&#x60C5;&#x5831;&#x3092;&#x96C6;&#x3081;&#x3066;&#x304B;&#x3089;&#x5224;&#x65AD;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x6025;&#x304C;&#x306A;&#x304F;&#x3066;&#x5927;&#x4E08;&#x592B;&#x3067;&#x3059;&#x3002;'},red:{cls:'red',dot:'r',label:'&#x1F534; &#x8D64;&#x4FE1;&#x53F7;&#xFF08;&#x6CE8;&#x610F;&#xFF09;',msg:'&#x4ECA;&#x306F;&#x614E;&#x91CD;&#x306B;&#x3002;&#x7126;&#x3089;&#x305A;&#x72B6;&#x6CC1;&#x304C;&#x843D;&#x3061;&#x7740;&#x304F;&#x306E;&#x3092;&#x5F85;&#x3061;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'}};
-var TERMS=[{q:'NISA&#x3063;&#x3066;&#x4F55;&#x3067;&#x3059;&#x304B;&#xFF1F;',a:'&#x5229;&#x76CA;&#x306B;&#x7A0E;&#x91D1;&#x304C;&#x304B;&#x304B;&#x3089;&#x306A;&#x3044;&#x56FD;&#x306E;&#x5236;&#x5EA6;&#x3067;&#x3059;&#x3002;2024&#x5E74;&#x304B;&#x3089;&#x65B0;NISA&#x306B;&#x306A;&#x308A;&#x3001;&#x5E74;&#x9593;360&#x4E07;&#x5186;&#x307E;&#x3067;&#x975E;&#x8AB2;&#x7A0E;&#x3067;&#x6295;&#x8CC7;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;'},{q:'&#x5206;&#x6563;&#x6295;&#x8CC7;&#x3068;&#x306F;&#xFF1F;',a:'&#x8907;&#x6570;&#x306E;&#x9298;&#x67C4;&#x306B;&#x5206;&#x3051;&#x3066;&#x6301;&#x3064;&#x3053;&#x3068;&#x3067;&#x30EA;&#x30B9;&#x30AF;&#x3092;&#x6E1B;&#x3089;&#x305B;&#x307E;&#x3059;&#x3002;moomoo&#x306E;&#x6295;&#x8CC7;&#x4FE1;&#x8A17;&#x3092;&#x4F7F;&#x3046;&#x3068;&#x81EA;&#x52D5;&#x3067;&#x5206;&#x6563;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;'},{q:'&#x914D;&#x5F53;&#x91D1;&#x3068;&#x306F;&#xFF1F;',a:'&#x4F1A;&#x793E;&#x304C;&#x5229;&#x76CA;&#x306E;&#x4E00;&#x90E8;&#x3092;&#x682A;&#x4E3B;&#x306B;&#x5206;&#x3051;&#x3066;&#x304F;&#x308C;&#x308B;&#x304A;&#x91D1;&#x3067;&#x3059;&#x3002;&#x5E74;1&#x301C;2&#x56DE;&#x632F;&#x308A;&#x8FBC;&#x307E;&#x308C;&#x307E;&#x3059;&#x3002;'},{q:'&#x640D;&#x5207;&#x308A;&#x3068;&#x306F;&#xFF1F;',a:'&#x640D;&#x5931;&#x304C;&#x5E83;&#x304C;&#x308B;&#x524D;&#x306B;&#x682A;&#x3092;&#x58F2;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x8CB7;&#x3046;&#x524D;&#x306B;&#x300C;&#x3053;&#x3053;&#x307E;&#x3067;&#x4E0B;&#x304C;&#x3063;&#x305F;&#x3089;&#x58F2;&#x308B;&#x300D;&#x3068;&#x6C7A;&#x3081;&#x3066;&#x304A;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'},{q:'&#x6295;&#x8CC7;&#x4FE1;&#x8A17;&#x3068;&#x306F;&#xFF1F;',a:'&#x30D7;&#x30ED;&#x304C;&#x4EE3;&#x308F;&#x308A;&#x306B;&#x904B;&#x7528;&#x3057;&#x3066;&#x304F;&#x308C;&#x308B;&#x5546;&#x54C1;&#x3067;&#x3059;&#x3002;1&#x4E07;&#x5186;&#x304B;&#x3089;&#x59CB;&#x3081;&#x3089;&#x308C;moomoo&#x3067;&#x3082;&#x8CB7;&#x3048;&#x307E;&#x3059;&#x3002;'},{q:'moomoo&#x3067;&#x682A;&#x3092;&#x8CB7;&#x3046;&#x306B;&#x306F;&#xFF1F;',a:'&#x2460;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x958B;&#x304F;&#x2192;&#x2461;&#x9298;&#x67C4;&#x691C;&#x7D22;&#x2192;&#x2462;&#x53D6;&#x5F15;&#x30DC;&#x30BF;&#x30F3;&#x2192;&#x2463;&#x8CB7;&#x30FB;&#x6570;&#x91CF;&#x30FB;&#x4FA1;&#x683C;&#x5165;&#x529B;&#x2192;&#x2464;&#x6CE8;&#x6587;&#x78BA;&#x8A8D;&#x2192;&#x78BA;&#x5B9A;'},{q:'&#x682A;&#x4FA1;&#x304C;&#x4E0B;&#x304C;&#x3063;&#x305F;&#x3089;&#xFF1F;',a:'&#x307E;&#x305A;&#x51B7;&#x975E;&#x3092;&#x5438;&#x3063;&#x3066;&#x51B7;&#x9759;&#x306B;&#x3002;&#x9577;&#x671F;&#x6295;&#x8CC7;&#x306A;&#x3089;&#x5C11;&#x3057;&#x306E;&#x4E0B;&#x843D;&#x306F;&#x6C17;&#x306B;&#x3057;&#x306A;&#x304F;&#x3066;&#x5927;&#x4E08;&#x592B;&#x3067;&#x3059;&#x3002;'},{q:'PER&#x3063;&#x3066;&#x4F55;&#xFF1F;',a:'&#x682A;&#x304C;&#x5272;&#x5B89;&#x304B;&#x5272;&#x9AD8;&#x304B;&#x3092;&#x898B;&#x308B;&#x76EE;&#x5B89;&#x3067;&#x3059;&#x3002;&#x4F4E;&#x3044;&#x307B;&#x3069;&#x5272;&#x5B89;&#x3002;&#x65E5;&#x672C;&#x682A;&#x5E73;&#x5747;15&#x500D;&#x524D;&#x5F8C;&#x3067;&#x3059;&#x3002;'}];
-function doLogin(){if(document.getElementById('pw-input').value===PW){localStorage.setItem('okaasan_auth','ok');showMain();}else{document.getElementById('pw-err').textContent='&#x5408;&#x8A00;&#x8449;&#x304C;&#x9055;&#x3044;&#x307E;&#x3059;&#x3002;&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x8A66;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;';}}
-function showMain(){document.getElementById('login-screen').style.display='none';document.getElementById('main-screen').style.display='block';}
-function doLogout(){localStorage.removeItem('okaasan_auth');document.getElementById('main-screen').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';}
+var chatHistory=[];
+function getApiKey(){return localStorage.getItem('okaasan_apikey')||'';}
+function saveApiKey(k){localStorage.setItem('okaasan_apikey',k);}
+function apiBanner(id){
+  var k=getApiKey();
+  var el=document.getElementById(id);
+  if(!k){el.innerHTML='<div class="api-banner"><p>🔑 AIを使うには、AnthropicのAPIキーを設定してください。<br>（一度設定すればずっと使えます）</p><div class="api-input-row"><input class="api-input" id="'+id+'-key" placeholder="sk-ant-..." type="password"/><button class="api-save-btn" onclick="doSaveKey(''+id+'')">保存する</button></div></div>';}
+  else{el.innerHTML='<p style="font-size:14px;color:#aaa;margin-bottom:12px">✅ APIキー設定済み　<button onclick="clearKey()" style="font-size:13px;color:#aaa;background:none;border:none;cursor:pointer;text-decoration:underline">変更する</button></p>';}
+}
+function doSaveKey(id){
+  var val=document.getElementById(id+'-key').value.trim();
+  if(val.startsWith('sk-ant-')){saveApiKey(val);location.reload();}
+  else{alert('APIキーは sk-ant- で始まる文字列を入力してください');}
+}
+function clearKey(){localStorage.removeItem('okaasan_apikey');location.reload();}
+function doLogin(){
+  if(document.getElementById('pw-input').value===PW){localStorage.setItem('okaasan_auth','ok');showMain();}
+  else{document.getElementById('pw-err').textContent='合言葉が違います。もう一度試してください。';}
+}
+function showMain(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('main-screen').style.display='block';
+  apiBanner('sim-api-banner');apiBanner('chat-api-banner');
+}
+function doLogout(){
+  localStorage.removeItem('okaasan_auth');
+  document.getElementById('main-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-err').textContent='';
+}
 document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-function checkSignal(){var t=document.getElementById('ticker-input').value.trim();if(!t)return;var btn=document.getElementById('check-btn');btn.disabled=true;btn.textContent='...';setTimeout(function(){var keys=['green','yellow','red'];var s=SIGNALS[keys[t.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)%3]];document.getElementById('signal-result').innerHTML='<div class="signal-box '+s.cls+'"><div class="signal-head"><div class="dot '+s.dot+'"></div>'+s.label+'</div><div class="signal-msg">'+s.msg+'</div><div class="signal-note">&#x203B;&#x53C2;&#x8003;&#x60C5;&#x5831;&#x3067;&#x3059;&#x3002;&#x6295;&#x8CC7;&#x306F;&#x81EA;&#x5DF1;&#x5224;&#x65AD;&#x3067;&#x3002;</div></div>';btn.disabled=false;btn.textContent='&#x8ABF;&#x3079;&#x308B;';},800);}
+async function callAI(messages){
+  var key=getApiKey();
+  if(!key){return 'APIキーが設定されていません。上の設定からAPIキーを入力してください。';}
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1024,system:'あなたは投資アドバイザーの「サクラ」です。moomoo証券を使う投資初心者のお母さんに対して、やさしく丁寧に答えてください。専門用語は使わず、わかりやすい言葉で説明してください。投資の断言（必ず儲かるなど）はせず、参考情報として伝えてください。回答は短めにまとめてください。',messages:messages})
+    });
+    var data=await res.json();
+    if(data.error)return 'エラー: '+data.error.message;
+    return data.content[0].text;
+  }catch(e){return 'エラーが発生しました。APIキーを確認してください。';}
+}
+async function runSimulation(){
+  var ticker=document.getElementById('sim-ticker').value.trim();
+  var amount=document.getElementById('sim-amount').value.trim();
+  if(!ticker||!amount){alert('銘柄名と金額を両方入力してください');return;}
+  var btn=document.getElementById('sim-btn');
+  btn.disabled=true;btn.textContent='AIが分析中...';
+  var resultEl=document.getElementById('sim-result');
+  resultEl.style.display='block';resultEl.textContent='分析中です...しばらくお待ちください';
+  var prompt=ticker+'に'+amount+'万円を投資する場合について、初心者にわかりやすく以下を教えてください：
+①この銘柄の特徴とリスク
+②'+amount+'万円投資した場合の配当・利益のシナリオ（楽観・中立・慎重の3パターン）
+③初心者へのアドバイス
+
+※必ず「これは参考情報であり、投資の保証ではありません」と最後に伝えてください。';
+  var reply=await callAI([{role:'user',content:prompt}]);
+  resultEl.textContent=reply;
+  btn.disabled=false;btn.textContent='AIに分析してもらう 🤖';
+}
+var SIGNALS={green:{cls:'green',dot:'g',label:'🟢 青信号（買い検討）',msg:'比較的買いやすいタイミングかもしれません。余裕資金の範囲で少額から始めましょう。'},yellow:{cls:'yellow',dot:'y',label:'🟡 黄信号（様子見）',msg:'もう少し情報を集めてから判断しましょう。急がなくて大丈夫です。'},red:{cls:'red',dot:'r',label:'🔴 赤信号（注意）',msg:'今は慎重に。焦らず状況が落ち着くのを待ちましょう。'}};
+function checkSignal(){
+  var t=document.getElementById('ticker-input').value.trim();if(!t)return;
+  var btn=document.getElementById('check-btn');btn.disabled=true;btn.textContent='調べ中...';
+  setTimeout(function(){
+    var keys=['green','yellow','red'];
+    var s=SIGNALS[keys[t.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)%3]];
+    document.getElementById('signal-result').innerHTML='<div class="signal-box '+s.cls+'"><div class="signal-head"><div class="dot '+s.dot+'"></div>'+s.label+'</div><div class="signal-msg">'+s.msg+'</div><div class="signal-note">※参考情報です。投資は自己判断で。</div></div>';
+    btn.disabled=false;btn.textContent='調べる';
+  },800);
+}
 document.getElementById('ticker-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkSignal();});
+function setQ(q){document.getElementById('chat-input').value=q;}
+async function sendChat(){
+  var input=document.getElementById('chat-input');
+  var text=input.value.trim();if(!text)return;
+  var sendBtn=document.getElementById('chat-send');sendBtn.disabled=true;input.value='';
+  appendMsg('user',text);chatHistory.push({role:'user',content:text});
+  var typingId=appendTyping();
+  var reply=await callAI(chatHistory.slice(-10));
+  removeTyping(typingId);chatHistory.push({role:'assistant',content:reply});
+  appendMsg('assistant',reply);sendBtn.disabled=false;scrollChat();
+}
+document.getElementById('chat-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
+function appendMsg(role,text){
+  var div=document.createElement('div');div.className='msg '+role;
+  var avatar=role==='assistant'?'🌸':'👩';
+  div.innerHTML='<div class="msg-avatar">'+avatar+'</div><div class="msg-bubble">'+escHtml(text)+'</div>';
+  document.getElementById('chat-messages').appendChild(div);scrollChat();
+}
+function appendTyping(){
+  var id='typing-'+Date.now();var div=document.createElement('div');
+  div.className='msg assistant';div.id=id;
+  div.innerHTML='<div class="msg-avatar">🌸</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  document.getElementById('chat-messages').appendChild(div);scrollChat();return id;
+}
+function removeTyping(id){var el=document.getElementById(id);if(el)el.remove();}
+function scrollChat(){var el=document.getElementById('chat-messages');el.scrollTop=el.scrollHeight;}
+function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
+/g,'<br>');}
+var TERMS=[{q:'NISAって何ですか？',a:'利益に税金がかからない国の制度です。2024年から新NISAになり、年間360万円まで非課税で投資できます。'},{q:'分散投資とは？',a:'複数の銘柄に分けて持つことでリスクを減らす考え方です。moomooの投資信託を使うと自動で分散できます。'},{q:'配当金とは？',a:'会社が利益の一部を株主に分けてくれるお金です。年1〜2回振り込まれます。'},{q:'損切りとは？',a:'損失が広がる前に株を売ることです。買う前に「ここまで下がったら売る」と決めておきましょう。'},{q:'投資信託とは？',a:'プロが代わりに運用してくれる商品です。1万円から始められmoomooでも買えます。'},{q:'moomooで株を買うには？',a:'①アプリを開く②銘柄検索③取引ボタン④買い・数量・価格入力⑤注文確認→確定。初めては成行注文が簡単です。'},{q:'株価が下がったら？',a:'冷静に。長期投資なら少しの下落は気にしなくて大丈夫。夜眠れないほど不安なら投資額を減らすサインです。'},{q:'PERって何？',a:'株が割安か割高かを見る目安です。低いほど割安。日本株平均は15倍前後です。'}];
 var gl=document.getElementById('glossary-list');
-TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">&#x25BC;</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
+TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">▼</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
 function toggleTerm(i){document.getElementById('tq'+i).classList.toggle('open');document.getElementById('ta'+i).classList.toggle('open');}
 var memo=document.getElementById('memo-area');var sv=localStorage.getItem('okaasan_memo');if(sv)memo.value=sv;
-var st;memo.addEventListener('input',function(){clearTimeout(st);document.getElementById('save-status').textContent='&#x4FDD;&#x5B58;&#x4E2D;...';st=setTimeout(function(){localStorage.setItem('okaasan_memo',memo.value);document.getElementById('save-status').textContent='&#x2713; &#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3057;&#x305F;';},700);});
+var st;memo.addEventListener('input',function(){clearTimeout(st);document.getElementById('save-status').textContent='保存中...';st=setTimeout(function(){localStorage.setItem('okaasan_memo',memo.value);document.getElementById('save-status').textContent='✓ 保存しました';},700);});
 if(localStorage.getItem('okaasan_auth')==='ok')showMain();
 </script>
 </body>
