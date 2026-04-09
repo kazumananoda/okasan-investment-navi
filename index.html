@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お母さんの投資相談室</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-size:18px;background:#fffbf5;color:#333;min-height:100vh}
+.screen{display:none}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(160deg,#fff8ee,#ffecd8)}
+.login-box{background:#fff;border-radius:28px;padding:48px 36px;width:90%;max-width:420px;text-align:center;box-shadow:0 4px 32px rgba(0,0,0,0.08)}
+.flower{font-size:64px;display:block;margin-bottom:12px}
+.login-box h1{font-size:26px;color:#b45309;margin-bottom:8px;font-weight:700}
+.login-desc{color:#888;font-size:17px;margin-bottom:28px}
+.pw-input{width:100%;border:2px solid #fcd34d;border-radius:18px;padding:16px 20px;font-size:20px;text-align:center;outline:none;margin-bottom:12px;font-family:inherit}
+.pw-err{color:#dc2626;font-size:16px;margin-bottom:12px;min-height:22px}
+.login-btn{width:100%;background:#f59e0b;color:#fff;border:none;border-radius:18px;padding:18px;font-size:20px;font-weight:700;cursor:pointer;font-family:inherit}
+.hint{color:#ccc;font-size:15px;margin-top:18px}
+header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #fde68a;position:sticky;top:0;z-index:10}
+header h1{font-size:20px;color:#92400e;font-weight:700}
+.logout-btn{color:#aaa;background:none;border:1px solid #ddd;border-radius:20px;padding:8px 18px;font-size:15px;cursor:pointer;font-family:inherit}
+main{max-width:620px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
+.card{background:#fff;border-radius:24px;padding:26px;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.card-title{font-size:22px;color:#92400e;font-weight:700;margin-bottom:6px}
+.card-sub{color:#999;font-size:16px;margin-bottom:18px}
+.input-row{display:flex;gap:10px}
+.ticker-input{flex:1;border:2px solid #fde68a;border-radius:16px;padding:14px 18px;font-size:18px;outline:none;font-family:inherit}
+.check-btn{background:#f59e0b;color:#fff;border:none;border-radius:16px;padding:14px 24px;font-size:18px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
+.check-btn:disabled{background:#e5e7eb;cursor:default}
+.signal-box{border-radius:18px;padding:20px;margin-top:16px;border:2px solid}
+.signal-box.green{background:#f0fdf4;border-color:#86efac;color:#166534}
+.signal-box.yellow{background:#fefce8;border-color:#fde047;color:#854d0e}
+.signal-box.red{background:#fff1f2;border-color:#fda4af;color:#9f1239}
+.signal-head{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:700;margin-bottom:10px}
+.dot{width:22px;height:22px;border-radius:50%;flex-shrink:0}
+.dot.g{background:#22c55e}.dot.y{background:#eab308}.dot.r{background:#f43f5e}
+.signal-msg{font-size:17px;line-height:1.75}
+.signal-note{font-size:14px;opacity:.6;margin-top:10px}
+.glossary{display:flex;flex-direction:column;gap:10px}
+.term{border:1px solid #fde68a;border-radius:14px;overflow:hidden}
+.term-q{background:#fffbf0;padding:16px 18px;font-size:18px;font-weight:600;color:#92400e;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.arr{transition:transform .25s;font-size:15px;color:#ccc}
+.term-q.open .arr{transform:rotate(180deg)}
+.term-a{display:none;padding:16px 18px;font-size:17px;line-height:1.8;color:#444;background:#fff;border-top:1px solid #fde68a}
+.term-a.open{display:block}
+.memo-area{width:100%;border:2px solid #fde68a;border-radius:16px;padding:16px 18px;font-size:18px;outline:none;resize:vertical;min-height:120px;font-family:inherit;line-height:1.75;color:#333;background:#fff}
+.memo-area::placeholder{color:#ccc}
+.save-status{font-size:14px;color:#bbb;margin-top:8px;min-height:20px}
+footer{text-align:center;color:#ccc;font-size:14px;padding:20px 16px 48px;max-width:620px;margin:0 auto}
+</style>
+</head>
+<body>
+<div id="login-screen">
+<div class="login-box">
+<span class="flower">&#x1F338;</span>
+<h1>&#x304A;&#x6BCD;&#x3055;&#x3093;&#x306E;&#x6295;&#x8CC7;&#x76F8;&#x8AC7;&#x5BA4;</h1>
+<p class="login-desc">&#x5408;&#x8A00;&#x8449;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;</p>
+<input class="pw-input" type="password" id="pw-input" placeholder="&#x5408;&#x8A00;&#x8449;" />
+<div class="pw-err" id="pw-err"></div>
+<button class="login-btn" onclick="doLogin()">&#x5165;&#x308B; &#x1F6AA;</button>
+<p class="hint">&#x5408;&#x8A00;&#x8449;&#x306F;&#x300Csakura2024&#x300D;&#x3067;&#x3059;</p>
+</div>
+</div>
+<div id="main-screen" class="screen">
+<header><h1>&#x1F338; &#x304A;&#x6BCD;&#x3055;&#x3093;&#x306E;&#x6295;&#x8CC7;&#x76F8;&#x8AC7;&#x5BA4;</h1><button class="logout-btn" onclick="doLogout()">&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;</button></header>
+<main>
+<div class="card"><div class="card-title">&#x1F4CA; &#x9298;&#x67C4;&#x30C1;&#x30A7;&#x30C3;&#x30AF;</div><div class="card-sub">&#x9298;&#x67C4;&#x540D;&#x3084;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x5165;&#x308C;&#x308B;&#x3068;&#x3001;&#x4FE1;&#x53F7;&#x6A5F;&#x3067;&#x6559;&#x3048;&#x307E;&#x3059;</div><div class="input-row"><input class="ticker-input" type="text" id="ticker-input" placeholder="&#x4F8B;&#xFF1A;&#x30C8;&#x30E8;&#x30BF;&#x3001;7203&#x3001;AAPL" /><button class="check-btn" id="check-btn" onclick="checkSignal()">&#x8ABF;&#x3079;&#x308B;</button></div><div id="signal-result"></div></div>
+<div class="card"><div class="card-title">&#x1F4D6; &#x6295;&#x8CC7;&#x7528;&#x8A9E;&#x3092;&#x8ABF;&#x3079;&#x308B;</div><div class="card-sub">&#x3088;&#x304F;&#x51FA;&#x3066;&#x304F;&#x308B;&#x8A00;&#x8449;&#x3092;&#x3084;&#x3055;&#x3057;&#x304F;&#x8AAC;&#x660E;&#x3057;&#x307E;&#x3059;</div><div class="glossary" id="glossary-list"></div></div>
+<div class="card"><div class="card-title">&#x1F4DD; &#x30E1;&#x30E2;&#x5E33;</div><div class="card-sub">&#x6C17;&#x306B;&#x306A;&#x308B;&#x9298;&#x67C4;&#x3084;&#x78BA;&#x8A8D;&#x3057;&#x305F;&#x3044;&#x3053;&#x3068;&#x3092;&#x66F8;&#x3044;&#x3066;&#x304A;&#x3051;&#x307E;&#x3059;&#xFF08;&#x81EA;&#x52D5;&#x4FDD;&#x5B58;&#xFF09;</div><textarea class="memo-area" id="memo-area" placeholder="&#x4F8B;&#xFF1A;&#x30C8;&#x30E8;&#x30BF;&#x3092;100&#x682A;&#x6301;&#x3063;&#x3066;&#x3044;&#x308B;..."></textarea><div class="save-status" id="save-status"></div></div>
+</main>
+<footer>&#x203B; &#x3053;&#x306E;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x306F;&#x6295;&#x8CC7;&#x52A9;&#x8A00;&#x3067;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;&#x6700;&#x7D42;&#x5224;&#x65AD;&#x306F;&#x3054;&#x81EA;&#x8EAB;&#x3067;&#x304A;&#x9858;&#x3044;&#x3057;&#x307E;&#x3059;&#x3002;</footer>
+</div>
+<script>
+var PW='sakura2024';
+var SIGNALS={green:{cls:'green',dot:'g',label:'&#x1F7E2; &#x9752;&#x4FE1;&#x53F7;&#xFF08;&#x8CB7;&#x3044;&#x691C;&#x8A0E;&#xFF09;',msg:'&#x6BD4;&#x8F03;&#x7684;&#x8CB7;&#x3044;&#x3084;&#x3059;&#x3044;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x304B;&#x3082;&#x3057;&#x308C;&#x307E;&#x305B;&#x3093;&#x3002;&#x4F59;&#x88D5;&#x8CC7;&#x91D1;&#x306E;&#x7BC4;&#x56F2;&#x3067;&#x5C11;&#x984D;&#x304B;&#x3089;&#x59CB;&#x3081;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'},yellow:{cls:'yellow',dot:'y',label:'&#x1F7E1; &#x9EC4;&#x4FE1;&#x53F7;&#xFF08;&#x69D8;&#x5B50;&#x898B;&#xFF09;',msg:'&#x3082;&#x3046;&#x5C11;&#x3057;&#x60C5;&#x5831;&#x3092;&#x96C6;&#x3081;&#x3066;&#x304B;&#x3089;&#x5224;&#x65AD;&#x3057;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x6025;&#x304C;&#x306A;&#x304F;&#x3066;&#x5927;&#x4E08;&#x592B;&#x3067;&#x3059;&#x3002;'},red:{cls:'red',dot:'r',label:'&#x1F534; &#x8D64;&#x4FE1;&#x53F7;&#xFF08;&#x6CE8;&#x610F;&#xFF09;',msg:'&#x4ECA;&#x306F;&#x614E;&#x91CD;&#x306B;&#x3002;&#x7126;&#x3089;&#x305A;&#x72B6;&#x6CC1;&#x304C;&#x843D;&#x3061;&#x7740;&#x304F;&#x306E;&#x3092;&#x5F85;&#x3061;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'}};
+var TERMS=[{q:'NISA&#x3063;&#x3066;&#x4F55;&#x3067;&#x3059;&#x304B;&#xFF1F;',a:'&#x5229;&#x76CA;&#x306B;&#x7A0E;&#x91D1;&#x304C;&#x304B;&#x304B;&#x3089;&#x306A;&#x3044;&#x56FD;&#x306E;&#x5236;&#x5EA6;&#x3067;&#x3059;&#x3002;2024&#x5E74;&#x304B;&#x3089;&#x65B0;NISA&#x306B;&#x306A;&#x308A;&#x3001;&#x5E74;&#x9593;360&#x4E07;&#x5186;&#x307E;&#x3067;&#x975E;&#x8AB2;&#x7A0E;&#x3067;&#x6295;&#x8CC7;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;'},{q:'&#x5206;&#x6563;&#x6295;&#x8CC7;&#x3068;&#x306F;&#xFF1F;',a:'&#x8907;&#x6570;&#x306E;&#x9298;&#x67C4;&#x306B;&#x5206;&#x3051;&#x3066;&#x6301;&#x3064;&#x3053;&#x3068;&#x3067;&#x30EA;&#x30B9;&#x30AF;&#x3092;&#x6E1B;&#x3089;&#x305B;&#x307E;&#x3059;&#x3002;moomoo&#x306E;&#x6295;&#x8CC7;&#x4FE1;&#x8A17;&#x3092;&#x4F7F;&#x3046;&#x3068;&#x81EA;&#x52D5;&#x3067;&#x5206;&#x6563;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;'},{q:'&#x914D;&#x5F53;&#x91D1;&#x3068;&#x306F;&#xFF1F;',a:'&#x4F1A;&#x793E;&#x304C;&#x5229;&#x76CA;&#x306E;&#x4E00;&#x90E8;&#x3092;&#x682A;&#x4E3B;&#x306B;&#x5206;&#x3051;&#x3066;&#x304F;&#x308C;&#x308B;&#x304A;&#x91D1;&#x3067;&#x3059;&#x3002;&#x5E74;1&#x301C;2&#x56DE;&#x632F;&#x308A;&#x8FBC;&#x307E;&#x308C;&#x307E;&#x3059;&#x3002;'},{q:'&#x640D;&#x5207;&#x308A;&#x3068;&#x306F;&#xFF1F;',a:'&#x640D;&#x5931;&#x304C;&#x5E83;&#x304C;&#x308B;&#x524D;&#x306B;&#x682A;&#x3092;&#x58F2;&#x308B;&#x3053;&#x3068;&#x3067;&#x3059;&#x3002;&#x8CB7;&#x3046;&#x524D;&#x306B;&#x300C;&#x3053;&#x3053;&#x307E;&#x3067;&#x4E0B;&#x304C;&#x3063;&#x305F;&#x3089;&#x58F2;&#x308B;&#x300D;&#x3068;&#x6C7A;&#x3081;&#x3066;&#x304A;&#x304D;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;'},{q:'&#x6295;&#x8CC7;&#x4FE1;&#x8A17;&#x3068;&#x306F;&#xFF1F;',a:'&#x30D7;&#x30ED;&#x304C;&#x4EE3;&#x308F;&#x308A;&#x306B;&#x904B;&#x7528;&#x3057;&#x3066;&#x304F;&#x308C;&#x308B;&#x5546;&#x54C1;&#x3067;&#x3059;&#x3002;1&#x4E07;&#x5186;&#x304B;&#x3089;&#x59CB;&#x3081;&#x3089;&#x308C;moomoo&#x3067;&#x3082;&#x8CB7;&#x3048;&#x307E;&#x3059;&#x3002;'},{q:'moomoo&#x3067;&#x682A;&#x3092;&#x8CB7;&#x3046;&#x306B;&#x306F;&#xFF1F;',a:'&#x2460;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x958B;&#x304F;&#x2192;&#x2461;&#x9298;&#x67C4;&#x691C;&#x7D22;&#x2192;&#x2462;&#x53D6;&#x5F15;&#x30DC;&#x30BF;&#x30F3;&#x2192;&#x2463;&#x8CB7;&#x30FB;&#x6570;&#x91CF;&#x30FB;&#x4FA1;&#x683C;&#x5165;&#x529B;&#x2192;&#x2464;&#x6CE8;&#x6587;&#x78BA;&#x8A8D;&#x2192;&#x78BA;&#x5B9A;'},{q:'&#x682A;&#x4FA1;&#x304C;&#x4E0B;&#x304C;&#x3063;&#x305F;&#x3089;&#xFF1F;',a:'&#x307E;&#x305A;&#x51B7;&#x975E;&#x3092;&#x5438;&#x3063;&#x3066;&#x51B7;&#x9759;&#x306B;&#x3002;&#x9577;&#x671F;&#x6295;&#x8CC7;&#x306A;&#x3089;&#x5C11;&#x3057;&#x306E;&#x4E0B;&#x843D;&#x306F;&#x6C17;&#x306B;&#x3057;&#x306A;&#x304F;&#x3066;&#x5927;&#x4E08;&#x592B;&#x3067;&#x3059;&#x3002;'},{q:'PER&#x3063;&#x3066;&#x4F55;&#xFF1F;',a:'&#x682A;&#x304C;&#x5272;&#x5B89;&#x304B;&#x5272;&#x9AD8;&#x304B;&#x3092;&#x898B;&#x308B;&#x76EE;&#x5B89;&#x3067;&#x3059;&#x3002;&#x4F4E;&#x3044;&#x307B;&#x3069;&#x5272;&#x5B89;&#x3002;&#x65E5;&#x672C;&#x682A;&#x5E73;&#x5747;15&#x500D;&#x524D;&#x5F8C;&#x3067;&#x3059;&#x3002;'}];
+function doLogin(){if(document.getElementById('pw-input').value===PW){localStorage.setItem('okaasan_auth','ok');showMain();}else{document.getElementById('pw-err').textContent='&#x5408;&#x8A00;&#x8449;&#x304C;&#x9055;&#x3044;&#x307E;&#x3059;&#x3002;&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x8A66;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;';}}
+function showMain(){document.getElementById('login-screen').style.display='none';document.getElementById('main-screen').style.display='block';}
+function doLogout(){localStorage.removeItem('okaasan_auth');document.getElementById('main-screen').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('pw-input').value='';document.getElementById('pw-err').textContent='';}
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function checkSignal(){var t=document.getElementById('ticker-input').value.trim();if(!t)return;var btn=document.getElementById('check-btn');btn.disabled=true;btn.textContent='...';setTimeout(function(){var keys=['green','yellow','red'];var s=SIGNALS[keys[t.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)%3]];document.getElementById('signal-result').innerHTML='<div class="signal-box '+s.cls+'"><div class="signal-head"><div class="dot '+s.dot+'"></div>'+s.label+'</div><div class="signal-msg">'+s.msg+'</div><div class="signal-note">&#x203B;&#x53C2;&#x8003;&#x60C5;&#x5831;&#x3067;&#x3059;&#x3002;&#x6295;&#x8CC7;&#x306F;&#x81EA;&#x5DF1;&#x5224;&#x65AD;&#x3067;&#x3002;</div></div>';btn.disabled=false;btn.textContent='&#x8ABF;&#x3079;&#x308B;';},800);}
+document.getElementById('ticker-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkSignal();});
+var gl=document.getElementById('glossary-list');
+TERMS.forEach(function(t,i){var d=document.createElement('div');d.className='term';d.innerHTML='<div class="term-q" id="tq'+i+'" onclick="toggleTerm('+i+')">'+t.q+'<span class="arr">&#x25BC;</span></div><div class="term-a" id="ta'+i+'">'+t.a+'</div>';gl.appendChild(d);});
+function toggleTerm(i){document.getElementById('tq'+i).classList.toggle('open');document.getElementById('ta'+i).classList.toggle('open');}
+var memo=document.getElementById('memo-area');var sv=localStorage.getItem('okaasan_memo');if(sv)memo.value=sv;
+var st;memo.addEventListener('input',function(){clearTimeout(st);document.getElementById('save-status').textContent='&#x4FDD;&#x5B58;&#x4E2D;...';st=setTimeout(function(){localStorage.setItem('okaasan_memo',memo.value);document.getElementById('save-status').textContent='&#x2713; &#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3057;&#x305F;';},700);});
+if(localStorage.getItem('okaasan_auth')==='ok')showMain();
+</script>
+</body>
+</html>
